@@ -141,7 +141,7 @@ This task focuses on basic user-related actions such as registering a new user, 
     ```
 - **Logout**: Implement a logout system that invalidates the JWT token, ensuring that users cannot access protected endpoints anymore.
 
-#### Task 2: Password Reset and OTP
+<!-- #### Task 2: Password Reset and OTP
 
 This task involves implementing password reset functionality using One-Time Passwords (OTPs). It tests the ability to send OTPs via email, verify them, and reset the user’s password.
 
@@ -602,7 +602,7 @@ This task focuses on advanced features such as creating automatic subscriptions 
     The user has GOLD and has bought it at 1000. If the price drops to 800, he buys a small amount as it could appreciate in value. If the price rises to 1200, he sells a part of the assets to get profitability.
     
     This profitability must be calculated.
-
+-->
 
 ## 💫 Guides
 
