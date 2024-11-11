@@ -20,5 +20,8 @@ public class Security {
 		return uuid.toString();
 	}
 	
-	
+	public static String generatorToken(){
+		
+		return null;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.micro.bank.dto.LoginUser;
 import com.micro.bank.dto.Persona;
 import com.micro.bank.entities.User;
 import com.micro.bank.exceptions.BadParametersException;
@@ -25,6 +26,7 @@ public class Services implements InterServicio{
 		Utils.validateNonEmptyParams(persona.getAddress(), "persona.address");
 		Utils.validateNonEmptyParams(persona.getEmail(), "persona.email");
 		Utils.validateNonEmptyParams(persona.getPhoneNumber(), "persona.phoneNumber");
+		Utils.validatePhoneNumber(persona.getPhoneNumber());
 		
 		Optional<User> usuarioByEmail = usuariodao.findByEmail(persona.getEmail());
 		Optional<User> usuarioByPhone = usuariodao.findByPhoneNumber(persona.getPhoneNumber());
@@ -72,10 +74,29 @@ public class Services implements InterServicio{
 		}
 	return persona;
 	}
+	
+	@Override
+	public LoginUser loginClient(LoginUser loginuser) throws BadParametersException{
+		
+		List<User> usuarioByEmail = usuariodao.findByEmailLogin(loginuser.getEmail());
+		
+		if(usuarioByEmail.isEmpty()){
+			throw new BadParametersException("User not found for the given identifier: " + loginuser.getEmail() + ".");
+		}
+		else if(loginuser.getPassword() != usuarioByEmail.get(1).toString()) {
+			throw new BadParametersException("Bad credentials");
+		}
+		else {
+			
+			loginuser.setToken("12345qwerty");
+		}
+		return loginuser;
+	}
+
+	
 
 	@Override
 	public List<User> findAll() {
 		return (List<User>) usuariodao.findAll();
 	}
-	
 }
