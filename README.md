@@ -1,5 +1,7 @@
 # 🏦 Bank Java Backend ☕️
 
+## 🎯 Objetive
+The objective is to develop a microservice that performs the tasks indicated for the correct management of banking clients.
 <!-- ## 🌐 Background
 
 You have just joined CaixaBank Tech, the technology arm of the CaixaBank group, to work on an exciting and innovative project. The team is currently composed of only one architect, who has brought you on board specifically to design the backend for a new extension of the CaixaBankNow and Imagin apps. This extension will allow clients to manage their transactions quickly, focusing on the stock market, while also integrating a robo-advisor system that will enable automatic stock trading.
