@@ -61,7 +61,7 @@ This task focuses on basic user-related actions such as registering a new user, 
 
 - **User Registration**: User Registration: The functionality is implemented to register a user by submitting the required information such as name, email, phone number and password. This registration will return the account number, which will be used for future operations.
 
-- Example of the Request body received:
+    Request body:
     ```json
     {
         "name":"Nuwe Test",
@@ -71,6 +71,7 @@ This task focuses on basic user-related actions such as registering a new user, 
         "phoneNumber":"666888116"
     }
     ```
+    
     Response:
     ```json
     {
@@ -91,7 +92,8 @@ This task focuses on basic user-related actions such as registering a new user, 
     - Check if the email or phoneNumber already exists.
 
 
-- **User Login**: Implement a login mechanism using either an email or account number along with a password. After successful authentication, the system should return a JWT token, which will be used for all protected endpoints.
+- **User Login**: A login mechanism is implemented using an email or account number along with a password. After successful authentication, the system should return a JWT token, which will be used for all protected endpoints.
+  
     Request body:
     ```json
     {
@@ -99,6 +101,7 @@ This task focuses on basic user-related actions such as registering a new user, 
         "password":"NuweTest1$"
     }
     ```
+    
     Response:
     ```json
     {
