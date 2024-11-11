@@ -59,8 +59,9 @@ The first thing to do is to configure the Dockerfile to be able to test the appl
 
 This task focuses on basic user-related actions such as registering a new user, logging in, retrieving user and account details, and logging out. For these actions, you will need to interact with several endpoints, some of which require authentication.
 
-- **User Registration**: Implement the functionality to register a user by sending the required information like name, email, phone number, and password. This registration should return the account number, which will be used for future operations.
-    Request body:
+- **User Registration**: User Registration: The functionality is implemented to register a user by submitting the required information such as name, email, phone number and password. This registration will return the account number, which will be used for future operations.
+
+- Example of the Request body received:
     ```json
     {
         "name":"Nuwe Test",
@@ -81,7 +82,7 @@ This task focuses on basic user-related actions such as registering a new user, 
         "hashedPassword": "$2a$10$vYWBxACqEIPeoT0O5b0faOHp4ITAHSBvoHDzBePW7tPqzpvqKLi6G"
     }
     ```
-    The accountNumber must be created and assigned to the account automatically by the app and be a UUID.
+    The application automatically creates and assigns the UUID type account number to the created customer.
     
     Checks should include:
     - No empty fields.
