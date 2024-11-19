@@ -6,11 +6,13 @@ public class LoginUser {
 	private String password;
 	private String token;
 	
+	
+	
 	public LoginUser() {
 	}
 	
-	public LoginUser(String name, String password, String token) {
-		this.email = name;
+	public LoginUser(String email, String password, String token) {
+		this.email = email;
 		this.password = password;
 		this.token = token;
 	}
@@ -19,8 +21,8 @@ public class LoginUser {
 		return email;
 	}
 
-	public void setEmail(String name) {
-		this.email = name;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -30,7 +32,7 @@ public class LoginUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public String getToken() {
 		return token;
 	}

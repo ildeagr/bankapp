@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 
+//import javax.validation.constraints.Email;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +23,6 @@ public class User implements Serializable{
 	private Long id;
 	private String name;
 	private String password;
-	
 	@Email
 	private String email;
 	private String address;

@@ -49,10 +49,11 @@
 		</dependency>
 		
 		<!-- Dependencia para la implementacion de seguridad y autentificaciones-->
+		<!--
 		<dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> -->
 
 
 		<!-- Dependencias para las bases de datos -->
@@ -75,7 +76,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- Dependencias Validación de google -->
+		<!-- Dependencias Validación de google --> 
 		<dependency>
 		    <groupId>javax.validation</groupId>
 		    <artifactId>validation-api</artifactId>
@@ -106,7 +107,7 @@
 		    <groupId>io.jsonwebtoken</groupId>
 		    <artifactId>jjwt-jackson</artifactId>
 		    <version>0.11.5</version> 
-		</dependency>
+		</dependency> 
 	</dependencies>
 
 	<build>

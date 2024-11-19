@@ -2,7 +2,7 @@ package com.micro.bank.utils;
 
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber; 
 import com.micro.bank.exceptions.BadParametersException;
 
 import io.micrometer.common.util.StringUtils;
@@ -16,6 +16,7 @@ public class Utils {
 		}
 	}
 
+	
 	public static void validatePhoneNumber(String phoneNumber) throws BadParametersException {
 		PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
 		PhoneNumber number;
@@ -28,5 +29,5 @@ public class Utils {
 		if(phoneUtil.isValidNumber(number)==false) {
 			throw new BadParametersException("the number is invalidate");
 		}
-	}
+	} 
 }

@@ -10,14 +10,16 @@ import com.micro.bank.dto.Persona;
 import com.micro.bank.entities.User;
 import com.micro.bank.exceptions.BadParametersException;
 import com.micro.bank.repositories.userRepository;
-import com.micro.bank.security.Security;
+import com.micro.bank.security.*;
 import com.micro.bank.utils.Utils;
+
 
 @Service
 public class Services implements InterServicio{
 
 	@Autowired
 	private userRepository usuariodao;
+	
 
 	@Override
 	public Persona createPersona(Persona persona) throws BadParametersException {
@@ -26,7 +28,7 @@ public class Services implements InterServicio{
 		Utils.validateNonEmptyParams(persona.getAddress(), "persona.address");
 		Utils.validateNonEmptyParams(persona.getEmail(), "persona.email");
 		Utils.validateNonEmptyParams(persona.getPhoneNumber(), "persona.phoneNumber");
-		Utils.validatePhoneNumber(persona.getPhoneNumber());
+		//Utils.validatePhoneNumber(persona.getPhoneNumber());
 		
 		Optional<User> usuarioByEmail = usuariodao.findByEmail(persona.getEmail());
 		Optional<User> usuarioByPhone = usuariodao.findByPhoneNumber(persona.getPhoneNumber());
@@ -63,6 +65,7 @@ public class Services implements InterServicio{
 			usuarioByEmail = usuariodao.findByEmail(persona.getEmail());
 			Long id = usuarioByEmail.map(User::getId).orElse(null);
 			persona.setId(id);
+			persona.setPassword("****");
 			
 		} 
 		
@@ -75,24 +78,42 @@ public class Services implements InterServicio{
 	return persona;
 	}
 	
+	
 	@Override
 	public LoginUser loginClient(LoginUser loginuser) throws BadParametersException{
+		Utils.validateNonEmptyParams(loginuser.getPassword(), "persona.password");
+		Utils.validateNonEmptyParams(loginuser.getEmail(), "persona.email");
 		
-		List<User> usuarioByEmail = usuariodao.findByEmailLogin(loginuser.getEmail());
+		User userdetails = new User();
+		Optional<User> usuarioByEmail = usuariodao.findByEmail(loginuser.getEmail());
+		
+		userdetails.setId(usuarioByEmail.map(User::getId).orElse(null));
+		userdetails.setName(usuarioByEmail.map(User::getName).orElse(null));
+		userdetails.setPassword(usuarioByEmail.map(User::getPassword).orElse(null));
+		userdetails.setAddress(usuarioByEmail.map(User::getAddress).orElse(null));
+		userdetails.setEmail(usuarioByEmail.map(User::getEmail).orElse(null));
+		userdetails.setPhoneNumber(usuarioByEmail.map(User::getPhoneNumber).orElse(null));
+		userdetails.setAccountNumber(usuarioByEmail.map(User::getAccountNumber).orElse(null));
+		userdetails.setHashedPassword(usuarioByEmail.map(User::getHashedPassword).orElse(null));
+		
+		
 		
 		if(usuarioByEmail.isEmpty()){
-			throw new BadParametersException("User not found for the given identifier: " + loginuser.getEmail() + ".");
+			 throw new BadParametersException("User not found for the given identifier: " + loginuser.getEmail() + ".");
 		}
-		else if(loginuser.getPassword() != usuarioByEmail.get(1).toString()) {
+		else if(loginuser.getPassword().equals(userdetails.getPassword())) {
+			userdetails.setToken(Jwt.generateToken(userdetails));
+			loginuser.setToken(userdetails.getToken());
+			
+			usuariodao.save(userdetails);
+		} 
+		else {
+			loginuser.setToken("1234");
 			throw new BadParametersException("Bad credentials");
 		}
-		else {
-			
-			loginuser.setToken("12345qwerty");
-		}
+	
 		return loginuser;
 	}
-
 	
 
 	@Override

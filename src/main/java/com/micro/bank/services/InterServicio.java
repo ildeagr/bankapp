@@ -8,8 +8,9 @@ import com.micro.bank.entities.User;
 import com.micro.bank.exceptions.BadParametersException;
 
 public interface InterServicio {
-
+	
+	List<User> findAll();
 	Persona createPersona(Persona persona) throws BadParametersException;
 	LoginUser loginClient(LoginUser loginuser) throws BadParametersException;
-	List<User> findAll();
+	
 }

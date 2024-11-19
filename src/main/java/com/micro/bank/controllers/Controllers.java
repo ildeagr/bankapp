@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+//import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.micro.bank.dto.Persona;
 import com.micro.bank.dto.Error;
+import com.micro.bank.dto.LoginResponse;
 import com.micro.bank.dto.LoginUser;
 import com.micro.bank.dto.PersonaResponse;
 import com.micro.bank.entities.User;
@@ -64,11 +67,14 @@ public class Controllers {
 	 return responseEntity;
 	}
 	
+	
 	@PostMapping("/api/users/login")
-	public String loginClient(@RequestBody LoginUser loginuser){
+	public ResponseEntity<LoginResponse> loginClient(@RequestBody LoginUser loginuser){
 		Error error = new Error();
+		LoginResponse newtoken = new LoginResponse();
+		LoginUser newloginuser = new LoginUser();
+		ResponseEntity<LoginResponse> responseEntity;
 		HttpStatus httpStatus = HttpStatus.OK;
-		LoginUser newloginuser = null;
 		
 		try {
 			newloginuser = productoService.loginClient(loginuser);
@@ -78,10 +84,12 @@ public class Controllers {
 			error.setCode(400);
 			httpStatus = HttpStatus.BAD_REQUEST;
 		}
+		newtoken.setToken(newloginuser.getToken());
+		newtoken.setError(error);
 		
-		loginuser.setToken(newloginuser.getToken());
+		responseEntity = new ResponseEntity<>(newtoken, httpStatus);
 		
-	return loginuser.getToken();
+	return responseEntity;
 	}
 }
 
