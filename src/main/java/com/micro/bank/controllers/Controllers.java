@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -88,9 +89,19 @@ public class Controllers {
 		newtoken.setError(error);
 		
 		responseEntity = new ResponseEntity<>(newtoken, httpStatus);
+	
+		return responseEntity;
+		}
 		
-	return responseEntity;
-	}
+	@GetMapping("/api/drashboard/users/{id}")
+	public User findById(@PathVariable ("id") Long id) {
+		return (User) productoService.findById(id);
+	} 
+	
+	@GetMapping("/api/drashboard/acount/{id}")
+	public User findByAcount(@PathVariable ("id") Long id) {
+		return (User) productoService.findById(id);
+	} 
 }
 
 

@@ -10,6 +10,9 @@ import com.micro.bank.exceptions.BadParametersException;
 public interface InterServicio {
 	
 	List<User> findAll();
+	User findById(Long id);
+	User findByAcount(Long id);
+	
 	Persona createPersona(Persona persona) throws BadParametersException;
 	LoginUser loginClient(LoginUser loginuser) throws BadParametersException;
 	

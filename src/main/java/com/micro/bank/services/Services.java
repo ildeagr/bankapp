@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.micro.bank.dto.LoginUser;
 import com.micro.bank.dto.Persona;
@@ -117,7 +119,26 @@ public class Services implements InterServicio{
 	
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<User> findAll() {
 		return (List<User>) usuariodao.findAll();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public User findById(Long id){
+		User infouser = new User();
+		infouser = (User) usuariodao.findById(id).orElse(null);
+		
+		return infouser;
+	}
+	
+	@Override
+	public User findByAcount(Long id) {
+		User infoacount = new User();
+		infoacount = (User) usuariodao.findById(id).orElse(null);
+		return infoacount;
+	}
 }
+
+
