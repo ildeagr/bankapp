@@ -30,12 +30,13 @@ public class User implements Serializable{
 	private String accountNumber;
 	private String hashedPassword;
 	private String token;
+	private String balance;
 	
 	
 	public User() {
 	}
 	
-	public User(Long id, String name, String password, String email, String address, String phoneNumber, String accountNumber, String hashedPassword, String token) {
+	public User(Long id, String name, String password, String email, String address, String phoneNumber, String accountNumber, String hashedPassword, String token, String balance) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -45,6 +46,7 @@ public class User implements Serializable{
 		this.accountNumber = accountNumber;
 		this.hashedPassword = hashedPassword;
 		this.token = token;
+		this.balance = balance;
 	}
 	
 
@@ -106,6 +108,13 @@ public class User implements Serializable{
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 		
 }

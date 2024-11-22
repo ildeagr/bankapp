@@ -94,13 +94,49 @@ public class Controllers {
 		}
 		
 	@GetMapping("/api/drashboard/users/{id}")
-	public User findById(@PathVariable ("id") Long id) {
-		return (User) productoService.findById(id);
+	public ResponseEntity<PersonaResponse>  findByInfo(@PathVariable ("id") Long id) {
+		Error error = new Error();
+		HttpStatus httpStatus = HttpStatus.OK;
+		Persona datos = null;
+		PersonaResponse personaResponse = new PersonaResponse();
+		
+		try {
+			datos = productoService.findByInfo(id);
+		} catch (BadParametersException e) {
+			error.setName("BadParameter");
+			error.setDescription(e.getMessage());
+			error.setCode(400);
+			httpStatus = HttpStatus.BAD_REQUEST;
+		}
+		
+		personaResponse.setPersona(datos);
+		personaResponse.setError(error);
+		ResponseEntity responseEntity = new ResponseEntity<>(personaResponse, httpStatus);
+		
+		return responseEntity;
 	} 
 	
 	@GetMapping("/api/drashboard/acount/{id}")
-	public User findByAcount(@PathVariable ("id") Long id) {
-		return (User) productoService.findById(id);
+	public ResponseEntity<PersonaResponse> findByAcount(@PathVariable ("id") Long id) {
+		Error error = new Error();
+		HttpStatus httpStatus = HttpStatus.OK;
+		Persona datos = null;
+		PersonaResponse personaResponse = new PersonaResponse();
+		
+		try {
+			datos = productoService.findByAcount(id);
+		} catch (BadParametersException e) {
+			error.setName("BadParameter");
+			error.setDescription(e.getMessage());
+			error.setCode(400);
+			httpStatus = HttpStatus.BAD_REQUEST;
+		}
+		
+		personaResponse.setPersona(datos);
+		personaResponse.setError(error);
+		ResponseEntity responseEntity = new ResponseEntity<>(personaResponse, httpStatus);
+		
+		return responseEntity;
 	} 
 }
 

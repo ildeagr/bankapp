@@ -126,18 +126,51 @@ public class Services implements InterServicio{
 	
 	@Override
 	@Transactional(readOnly = true)
-	public User findById(Long id){
+	public Persona findByInfo (Long id) throws BadParametersException{
+		
 		User infouser = new User();
+		Persona datos = new Persona();
+		
 		infouser = (User) usuariodao.findById(id).orElse(null);
 		
-		return infouser;
+		Boolean validatetoken = Jwt.validateToken(infouser.getToken(), infouser);
+		
+		if (validatetoken) {
+			
+			datos.setName(infouser.getName());
+			datos.setEmail(infouser.getEmail());
+			datos.setPhoneNumber(infouser.getPhoneNumber());
+			datos.setAddress(infouser.getAddress());
+			datos.setAccountNumber(infouser.getAccountNumber());
+			datos.setHashedPassword(infouser.getHashedPassword());
+			
+			return datos;
+		}
+		else {
+			throw new BadParametersException("Token not validated");
+		}
 	}
 	
 	@Override
-	public User findByAcount(Long id) {
-		User infoacount = new User();
-		infoacount = (User) usuariodao.findById(id).orElse(null);
-		return infoacount;
+	@Transactional(readOnly = true)
+	public Persona findByAcount(Long id) throws BadParametersException {
+		User infocount = new User();
+		Persona datos = new Persona();
+		
+		infocount = (User) usuariodao.findById(id).orElse(null);
+		
+		Boolean validatetoken = Jwt.validateToken(infocount.getToken(), infocount);
+		
+		if (validatetoken) {
+			
+			datos.setAccountNumber(infocount.getAccountNumber());
+			datos.setBalance(infocount.getHashedPassword());
+			
+			return datos;
+		}
+		else {
+			throw new BadParametersException("Token not validated");
+		}
 	}
 }
 

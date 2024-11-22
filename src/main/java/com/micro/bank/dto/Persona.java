@@ -11,11 +11,14 @@ public class Persona {
 	private String accountNumber;
 	private String hashedPassword;
 	private String token;
+	private String balance;
+
+	
 
 	public Persona() {
 	}
 	
-	public Persona(Long id, String name, String password, String email, String address, String phoneNumber, String accountNumber, String hashedPassword, String token) {
+	public Persona(Long id, String name, String password, String email, String address, String phoneNumber, String accountNumber, String hashedPassword, String token, String balance) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -25,6 +28,7 @@ public class Persona {
 		this.accountNumber = accountNumber;
 		this.hashedPassword = hashedPassword;
 		this.token = token;
+		this.balance = balance;
 	}
 	
 	
@@ -85,6 +89,13 @@ public class Persona {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 	
 }
